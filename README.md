@@ -17,6 +17,7 @@ This is a list of great pads deployed at Launchpad.
 - [Relational data: Authors and posts](https://launchpad.graphql.com/1jzxrj179) - a more complex schema that has related objects that can be fetched in a nested query.
 - [Simple Mocking with graphql-tools](https://launchpad.graphql.com/98lq7vz8r) - a simple example of using the default mocking in graphql-tools to create realistic mocked data in seconds.
 - [Loading from a MongoDB database](https://launchpad.graphql.com/vkmr1kl83) - an example of reading from a remote data source, in this case MongoDB.
+- [MongoDB with Mongoose example](https://launchpad.graphql.com/m55w845j9) - an example of reading from a remote data source, in this case MongoDB with mongoose
 - [Social Login with Auth0](https://launchpad.graphql.com/n4xk8xm87) - Authentication via JWT and social login
 - [Star Wars API](https://launchpad.graphql.com/mpjk0plp9) - the Star Wars API you know and love from GraphQL.org.
 - [graphql-relay-tools](https://launchpad.graphql.com/1w4r8lx49) - Relay-compliant Star Wars API created using a package that makes it easy to create a relay-compliant schema together with `graphql-tools`.
