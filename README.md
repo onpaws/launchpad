@@ -28,6 +28,7 @@ This is a list of great pads deployed at Launchpad.
 - [Movie Recommendations with Neo4j](https://launchpad.graphql.com/3wzp7qnjv) - a simple movie schema with recommendations, backed by Neo4j graph database
 - [Current Weather at any location](https://launchpad.graphql.com/5rrx10z19) - Get the current weather at any location through Google Maps API geocoding and the Dark Sky weather API!
 - [One To Many And One To One Relationships](https://launchpad.graphql.com/4nqqqmr19) - example showing how to implement one to many and one to one relationships the easy way
+- [Singlish GraphQL](https://launchpad.graphql.com/5v3j30m39) - Search word from singlish vocabulary
 - [Spotify API with Expo Snack UI](https://launchpad.graphql.com/pjwnq05l0) - how to fetch from the Spotify REST API with GraphQL, and then display it in a [React Native UI](https://snack.expo.io/ry2l_IXZW).
 - [RSVP management for events](https://launchpad.graphql.com/4nq37v3x9) - Shows multiple query mutations per Mutation type, as well as querying deeply nested data.
 - [GRPC](https://launchpad.graphql.com/mrwx0l4x9) - Example using [GRPC](http://www.grpc.io/)
