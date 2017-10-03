@@ -116,12 +116,14 @@ try {
         }, {});
 
       return Promise.all([
+        Promise.resolve(schema),
         Promise.resolve(contextFn(context.headers, userContext)),
         Promise.resolve(rootFunction(context.headers, userContext)),
       ])
         .then(function (result) {
-          var graphQLContext = result[0];
-          var rootValue = result[1];
+          var schema = result[0];
+          var graphQLContext = result[1];
+          var rootValue = result[2];
           return graphql.graphql(
             schema,
             query,
