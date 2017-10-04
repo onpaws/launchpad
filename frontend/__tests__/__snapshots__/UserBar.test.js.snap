@@ -1,402 +1,300 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders normal 1`] = `
-<HashRouter>
-  <Router
-    history={
-      Object {
-        "action": "POP",
-        "block": [Function],
-        "createHref": [Function],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "length": 2,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
-      }
+<UserBar
+  onLogin={[Function]}
+  onLogout={[Function]}
+  user={
+    Object {
+      "githubUsername": "example",
+      "id": "test-id",
+      "pads": Array [],
     }
+  }
+>
+  <div
+    className="UserBar"
   >
-    <div>
-      <UserBar
-        onLogin={[Function]}
-        onLogout={[Function]}
-        user={
-          Object {
-            "githubUsername": "example",
-            "id": "test-id",
-            "pads": Array [],
-          }
-        }
-      >
-        <div
-          className="UserBar"
+    <HeaderDropdown
+      button={
+        <HeaderButton
+          active={false}
+          onClick={[Function]}
         >
-          <HeaderDropdown
-            button={
-              <HeaderButton
-                active={false}
-                onClick={[Function]}
-              >
-                <span
-                  className="icon-user"
-                />
-                <span>
-                  example
-                </span>
-                <span
-                  className="UserBar-Arrow"
-                >
-                  ▾
-                </span>
-              </HeaderButton>
-            }
-            onClose={[Function]}
-            open={false}
+          <span
+            className="icon-user"
+          />
+          <span>
+            example
+          </span>
+          <span
+            className="UserBar-Arrow"
+          >
+            ▾
+          </span>
+        </HeaderButton>
+      }
+      onClose={[Function]}
+      open={false}
+    >
+      <div
+        className="HeaderDropdown"
+      >
+        <HeaderButton
+          active={false}
+          onClick={[Function]}
+        >
+          <button
+            className="HeaderButton"
+            onClick={[Function]}
           >
             <div
-              className="HeaderDropdown"
+              className="HeaderButton-Inner"
             >
-              <HeaderButton
-                active={false}
-                onClick={[Function]}
+              <span
+                className="icon-user"
+              />
+              <span>
+                example
+              </span>
+              <span
+                className="UserBar-Arrow"
               >
-                <button
-                  className="HeaderButton"
-                  onClick={[Function]}
-                >
-                  <div
-                    className="HeaderButton-Inner"
-                  >
-                    <span
-                      className="icon-user"
-                    />
-                    <span>
-                      example
-                    </span>
-                    <span
-                      className="UserBar-Arrow"
-                    >
-                      ▾
-                    </span>
-                  </div>
-                </button>
-              </HeaderButton>
-              <div
-                className="HeaderDropdown-Dropdown"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-              >
-                <HeaderDropdownButton
-                  onClick={[Function]}
-                >
-                  <button
-                    className="HeaderDropdownButton"
-                    onClick={[Function]}
-                  >
-                    Sign out
-                  </button>
-                </HeaderDropdownButton>
-                <HeaderDropdownButton>
-                  <button
-                    className="HeaderDropdownButton"
-                  >
-                    <Link
-                      replace={false}
-                      to="/list"
-                    >
-                      <a
-                        href="#/list"
-                        onClick={[Function]}
-                      >
-                        Pads you created
-                      </a>
-                    </Link>
-                  </button>
-                </HeaderDropdownButton>
-              </div>
+                ▾
+              </span>
             </div>
-          </HeaderDropdown>
+          </button>
+        </HeaderButton>
+        <div
+          className="HeaderDropdown-Dropdown"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        >
+          <HeaderDropdownButton
+            onClick={[Function]}
+          >
+            <button
+              className="HeaderDropdownButton"
+              onClick={[Function]}
+            >
+              Sign out
+            </button>
+          </HeaderDropdownButton>
+          <HeaderDropdownButton>
+            <button
+              className="HeaderDropdownButton"
+            >
+              <a
+                href="/list"
+              >
+                Pads you created
+              </a>
+            </button>
+          </HeaderDropdownButton>
         </div>
-      </UserBar>
-      ,
-    </div>
-  </Router>
-</HashRouter>
+      </div>
+    </HeaderDropdown>
+  </div>
+</UserBar>
 `;
 
 exports[`renders normal 2`] = `
-<HashRouter>
-  <Router
-    history={
-      Object {
-        "action": "POP",
-        "block": [Function],
-        "createHref": [Function],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "length": 2,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
-      }
+<UserBar
+  onLogin={[Function]}
+  onLogout={[Function]}
+  user={
+    Object {
+      "githubUsername": "example",
+      "id": "test-id",
+      "pads": Array [],
     }
+  }
+>
+  <div
+    className="UserBar"
   >
-    <div>
-      <UserBar
-        onLogin={[Function]}
-        onLogout={[Function]}
-        user={
-          Object {
-            "githubUsername": "example",
-            "id": "test-id",
-            "pads": Array [],
-          }
-        }
-      >
-        <div
-          className="UserBar"
+    <HeaderDropdown
+      button={
+        <HeaderButton
+          active={true}
+          onClick={[Function]}
         >
-          <HeaderDropdown
-            button={
-              <HeaderButton
-                active={true}
-                onClick={[Function]}
-              >
-                <span
-                  className="icon-user"
-                />
-                <span>
-                  example
-                </span>
-                <span
-                  className="UserBar-Arrow"
-                >
-                  ▾
-                </span>
-              </HeaderButton>
-            }
-            onClose={[Function]}
-            open={true}
+          <span
+            className="icon-user"
+          />
+          <span>
+            example
+          </span>
+          <span
+            className="UserBar-Arrow"
+          >
+            ▾
+          </span>
+        </HeaderButton>
+      }
+      onClose={[Function]}
+      open={true}
+    >
+      <div
+        className="HeaderDropdown"
+      >
+        <HeaderButton
+          active={true}
+          onClick={[Function]}
+        >
+          <button
+            className="HeaderButton HeaderButton--active"
+            onClick={[Function]}
           >
             <div
-              className="HeaderDropdown"
+              className="HeaderButton-Inner"
             >
-              <HeaderButton
-                active={true}
-                onClick={[Function]}
+              <span
+                className="icon-user"
+              />
+              <span>
+                example
+              </span>
+              <span
+                className="UserBar-Arrow"
               >
-                <button
-                  className="HeaderButton HeaderButton--active"
-                  onClick={[Function]}
-                >
-                  <div
-                    className="HeaderButton-Inner"
-                  >
-                    <span
-                      className="icon-user"
-                    />
-                    <span>
-                      example
-                    </span>
-                    <span
-                      className="UserBar-Arrow"
-                    >
-                      ▾
-                    </span>
-                  </div>
-                </button>
-              </HeaderButton>
-              <div
-                className="HeaderDropdown-Dropdown"
-                style={Object {}}
-              >
-                <HeaderDropdownButton
-                  onClick={[Function]}
-                >
-                  <button
-                    className="HeaderDropdownButton"
-                    onClick={[Function]}
-                  >
-                    Sign out
-                  </button>
-                </HeaderDropdownButton>
-                <HeaderDropdownButton>
-                  <button
-                    className="HeaderDropdownButton"
-                  >
-                    <Link
-                      replace={false}
-                      to="/list"
-                    >
-                      <a
-                        href="#/list"
-                        onClick={[Function]}
-                      >
-                        Pads you created
-                      </a>
-                    </Link>
-                  </button>
-                </HeaderDropdownButton>
-              </div>
+                ▾
+              </span>
             </div>
-          </HeaderDropdown>
+          </button>
+        </HeaderButton>
+        <div
+          className="HeaderDropdown-Dropdown"
+          style={Object {}}
+        >
+          <HeaderDropdownButton
+            onClick={[Function]}
+          >
+            <button
+              className="HeaderDropdownButton"
+              onClick={[Function]}
+            >
+              Sign out
+            </button>
+          </HeaderDropdownButton>
+          <HeaderDropdownButton>
+            <button
+              className="HeaderDropdownButton"
+            >
+              <a
+                href="/list"
+              >
+                Pads you created
+              </a>
+            </button>
+          </HeaderDropdownButton>
         </div>
-      </UserBar>
-      ,
-    </div>
-  </Router>
-</HashRouter>
+      </div>
+    </HeaderDropdown>
+  </div>
+</UserBar>
 `;
 
 exports[`renders normal 3`] = `
-<HashRouter>
-  <Router
-    history={
-      Object {
-        "action": "POP",
-        "block": [Function],
-        "createHref": [Function],
-        "go": [Function],
-        "goBack": [Function],
-        "goForward": [Function],
-        "length": 2,
-        "listen": [Function],
-        "location": Object {
-          "hash": "",
-          "pathname": "/",
-          "search": "",
-          "state": undefined,
-        },
-        "push": [Function],
-        "replace": [Function],
-      }
+<UserBar
+  onLogin={[Function]}
+  onLogout={[Function]}
+  user={
+    Object {
+      "githubUsername": "example",
+      "id": "test-id",
+      "pads": Array [],
     }
+  }
+>
+  <div
+    className="UserBar"
   >
-    <div>
-      <UserBar
-        onLogin={[Function]}
-        onLogout={[Function]}
-        user={
-          Object {
-            "githubUsername": "example",
-            "id": "test-id",
-            "pads": Array [],
-          }
-        }
-      >
-        <div
-          className="UserBar"
+    <HeaderDropdown
+      button={
+        <HeaderButton
+          active={false}
+          onClick={[Function]}
         >
-          <HeaderDropdown
-            button={
-              <HeaderButton
-                active={false}
-                onClick={[Function]}
-              >
-                <span
-                  className="icon-user"
-                />
-                <span>
-                  example
-                </span>
-                <span
-                  className="UserBar-Arrow"
-                >
-                  ▾
-                </span>
-              </HeaderButton>
-            }
-            onClose={[Function]}
-            open={false}
+          <span
+            className="icon-user"
+          />
+          <span>
+            example
+          </span>
+          <span
+            className="UserBar-Arrow"
+          >
+            ▾
+          </span>
+        </HeaderButton>
+      }
+      onClose={[Function]}
+      open={false}
+    >
+      <div
+        className="HeaderDropdown"
+      >
+        <HeaderButton
+          active={false}
+          onClick={[Function]}
+        >
+          <button
+            className="HeaderButton"
+            onClick={[Function]}
           >
             <div
-              className="HeaderDropdown"
+              className="HeaderButton-Inner"
             >
-              <HeaderButton
-                active={false}
-                onClick={[Function]}
+              <span
+                className="icon-user"
+              />
+              <span>
+                example
+              </span>
+              <span
+                className="UserBar-Arrow"
               >
-                <button
-                  className="HeaderButton"
-                  onClick={[Function]}
-                >
-                  <div
-                    className="HeaderButton-Inner"
-                  >
-                    <span
-                      className="icon-user"
-                    />
-                    <span>
-                      example
-                    </span>
-                    <span
-                      className="UserBar-Arrow"
-                    >
-                      ▾
-                    </span>
-                  </div>
-                </button>
-              </HeaderButton>
-              <div
-                className="HeaderDropdown-Dropdown"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-              >
-                <HeaderDropdownButton
-                  onClick={[Function]}
-                >
-                  <button
-                    className="HeaderDropdownButton"
-                    onClick={[Function]}
-                  >
-                    Sign out
-                  </button>
-                </HeaderDropdownButton>
-                <HeaderDropdownButton>
-                  <button
-                    className="HeaderDropdownButton"
-                  >
-                    <Link
-                      replace={false}
-                      to="/list"
-                    >
-                      <a
-                        href="#/list"
-                        onClick={[Function]}
-                      >
-                        Pads you created
-                      </a>
-                    </Link>
-                  </button>
-                </HeaderDropdownButton>
-              </div>
+                ▾
+              </span>
             </div>
-          </HeaderDropdown>
+          </button>
+        </HeaderButton>
+        <div
+          className="HeaderDropdown-Dropdown"
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+        >
+          <HeaderDropdownButton
+            onClick={[Function]}
+          >
+            <button
+              className="HeaderDropdownButton"
+              onClick={[Function]}
+            >
+              Sign out
+            </button>
+          </HeaderDropdownButton>
+          <HeaderDropdownButton>
+            <button
+              className="HeaderDropdownButton"
+            >
+              <a
+                href="/list"
+              >
+                Pads you created
+              </a>
+            </button>
+          </HeaderDropdownButton>
         </div>
-      </UserBar>
-      ,
-    </div>
-  </Router>
-</HashRouter>
+      </div>
+    </HeaderDropdown>
+  </div>
+</UserBar>
 `;

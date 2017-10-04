@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import type { Children } from 'react';
-import { Link } from 'react-router-dom';
 import './HeaderButton.less';
 
 export default class HeaderButton extends Component {
@@ -12,7 +11,6 @@ export default class HeaderButton extends Component {
     active?: boolean,
     tooltip?: Children,
     children?: Children,
-    to?: string,
   |};
 
   state = ({
@@ -74,23 +72,13 @@ export default class HeaderButton extends Component {
       buttonClassName += ' HeaderButton--active';
     }
 
-    let Component;
-    const componentProps = {};
-    if (this.props.to) {
-      Component = Link;
-      componentProps.to = this.props.to;
-    } else {
-      Component = 'button';
-      componentProps.onClick = this.props.onClick;
-    }
-
     return (
-      <Component className={buttonClassName} {...componentProps}>
+      <button className={buttonClassName} onClick={this.props.onClick}>
         <div className="HeaderButton-Inner" {...tooltipHandlers}>
           {this.props.children}
         </div>
         {this.renderTooltip()}
-      </Component>
+      </button>
     );
   }
 }
