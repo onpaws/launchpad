@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import type { User } from '../types';
 import HeaderDropdownButton from './HeaderDropdownButton';
 import HeaderDropdown from './HeaderDropdown';
@@ -83,7 +82,7 @@ export default class UserBar extends Component {
               Sign out
             </HeaderDropdownButton>
             <HeaderDropdownButton>
-              <Link to="/list">Pads you created</Link>
+              <a href="/list">Pads you created</a>
             </HeaderDropdownButton>
           </HeaderDropdown>
         </div>

@@ -1,32 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders normal 1`] = `
-<div>
-  <div
-    className="ListPad"
+<div
+  className="ListPad"
+>
+  <a
+    className="ListPad-Link"
+    href="/fakeid1"
   >
-    <a
-      className="ListPad-Link"
-      href="fakeid1"
-      onClick={[Function]}
+    <div
+      className="ListPad-Header"
     >
-      Pads you created
       <div
-        className="ListPad-Header"
+        className="ListPad-HeaderUsername"
       >
-        <div
-          className="ListPad-HeaderUsername"
-        >
-          example
-        </div>
-        <div
-          className="ListPad-HeaderTitle"
-        >
-          Fake 1
-        </div>
+        example
       </div>
-    </a>
-  </div>
-  ,
+      <div
+        className="ListPad-HeaderTitle"
+      >
+        Fake 1
+      </div>
+    </div>
+  </a>
 </div>
 `;
