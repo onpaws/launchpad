@@ -73,7 +73,10 @@ try {
 
   var graphql = require('graphql');
 
-  var schema = exports.schema;
+  var schemaFunction = exports.schemaFunction || function () {
+    return exports.schema;
+  }
+  var schema;
   var rootValue = exports.rootValue || {};
   var rootFunction = exports.rootFunction || function () {
     return rootValue;
@@ -91,6 +94,7 @@ try {
     if ([
       'default',
       'schema',
+      'schemaFunction',
       'context',
       'rootValue',
       'rootFunction',
@@ -99,8 +103,8 @@ try {
     }
   });
 
-  if (!schema) {
-    throw new Error('You need to export object with a field \`schema\` to run a Pad.');
+  if (!schema && !schemaFunction) {
+    throw new Error('You need to export object with a field \`schema\` or a function \`schemaFunction\` to run a Pad.');
   }
 
   function runGraphQL(schema, rootValue, context) {
@@ -156,6 +160,9 @@ try {
   module.exports = function webtask(context, callback) {
     if (!context.body || !context.body.query) {
       callback('No query was provided in request body.');
+    }
+    if (!schema) {
+      schema = schemaFunction(context.secrets.userContext);
     }
     runGraphQL(schema, rootValue, context).then(function (result) {
       if (result.ok) {
