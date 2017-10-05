@@ -103,21 +103,15 @@ try {
     }
   });
 
-  if (!schema && !schemaFunction) {
+  if (!exports.schema && !exports.schemaFunction) {
     throw new Error('You need to export object with a field \`schema\` or a function \`schemaFunction\` to run a Pad.');
   }
 
-  function runGraphQL(schema, rootValue, context) {
+  function runGraphQL(schema, rootValue, context, userContext) {
     try {
       var query = context.body.query;
       var variables = context.body.variables;
       var operationName = context.body.operationName;
-
-      var userContext = JSON.parse(context.secrets.userContext)
-        .reduce(function (acc, next) {
-          acc[next.key] = next.value;
-          return acc;
-        }, {});
 
       return Promise.all([
         Promise.resolve(schema),
@@ -164,7 +158,12 @@ try {
     if (!schema) {
       schema = schemaFunction(context.secrets.userContext);
     }
-    runGraphQL(schema, rootValue, context).then(function (result) {
+    var userContext = JSON.parse(context.secrets.userContext)
+      .reduce(function (acc, next) {
+        acc[next.key] = next.value;
+        return acc;
+      }, {});
+    runGraphQL(schema, rootValue, context, userContext).then(function (result) {
       if (result.ok) {
         callback(null, result.result);
       } else {
