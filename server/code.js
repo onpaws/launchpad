@@ -155,14 +155,14 @@ try {
     if (!context.body || !context.body.query) {
       callback('No query was provided in request body.');
     }
-    if (!schema) {
-      schema = schemaFunction(context.secrets.userContext);
-    }
     var userContext = JSON.parse(context.secrets.userContext)
-      .reduce(function (acc, next) {
-        acc[next.key] = next.value;
-        return acc;
-      }, {});
+    .reduce(function (acc, next) {
+      acc[next.key] = next.value;
+      return acc;
+    }, {});
+    if (!schema) {
+      schema = schemaFunction(userContext);
+    }
     runGraphQL(schema, rootValue, context, userContext).then(function (result) {
       if (result.ok) {
         callback(null, result.result);
