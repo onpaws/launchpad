@@ -8,6 +8,16 @@ import type { Context, Dependency } from './types';
 const UNPKG_URL = 'https://unpkg.com';
 const WEBTASK_API_URL = 'https://webtask.it.auth0.com/api';
 
+const CORE_DEPENDENCIES = [
+  'graphql',
+  'apollo-engine',
+  'express',
+  'webtask-tools',
+  'body-parser',
+  'express-graphql',
+  'apollo-tracing',
+];
+
 class WebtaskProvider {
   webtaskUrl: string;
   token: string;
@@ -121,9 +131,11 @@ class WebtaskProvider {
     const packageMap = fromPairs(
       oldDependencies.map(({ name, version }) => [name, version]),
     );
-    if (!dependencies.find(name => name === 'graphql')) {
-      dependencies = ['graphql', ...dependencies];
-    }
+    CORE_DEPENDENCIES.forEach(coreDep => {
+      if (!dependencies.find(name => name === coreDep)) {
+        dependencies = [coreDep, ...dependencies];
+      }
+    });
     const result = await Promise.all(
       dependencies.map(async name => {
         if (packageMap[name]) {
@@ -229,6 +241,20 @@ class WebtaskProvider {
       endpoint = `/webtask/${containerId}/${name}`;
     }
 
+    let url;
+    if (this.noProxy) {
+      if (this.singleTenantContainer) {
+        url = `${this.webtaskUrl}/run/${this
+          .singleTenantContainer}/${containerId}_${name}`;
+      } else {
+        url = `${this.webtaskUrl}/run/${containerId}/${name}`;
+      }
+    } else if (name === 'draft') {
+      url = `https://${containerId}.lp.gql.zone/draft/graphql`;
+    } else {
+      url = `https://${containerId}.lp.gql.zone/graphql`;
+    }
+
     const result = await this.query({
       endpoint,
       method: 'PUT',
@@ -237,6 +263,7 @@ class WebtaskProvider {
         secrets: {
           userContext: JSON.stringify(context),
           pb: 1,
+          url,
         },
         meta: {
           padId: containerId,
@@ -246,15 +273,6 @@ class WebtaskProvider {
         },
       },
     });
-    let url;
-    if (this.noProxy) {
-      url = `${this.webtaskUrl}/run/${result.response.container}/${result
-        .response.name}`;
-    } else if (name === 'draft') {
-      url = `https://${result.response.container}.lp.gql.zone/draft/graphql`;
-    } else {
-      url = `https://${result.response.container}.lp.gql.zone/graphql`;
-    }
 
     if (result.ok) {
       return {
