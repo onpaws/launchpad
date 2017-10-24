@@ -127,6 +127,8 @@ export const RUNNER_WRAPPER = (code: string) =>
       );
     }
 
+    process.env["GOMAXPROCS"] = "1"
+
     if (!server) {
       server = express();
       server.use(
@@ -140,25 +142,6 @@ export const RUNNER_WRAPPER = (code: string) =>
           }, {});
           if (!schema) {
             schema = schemaFunction(req.userContext);
-          }
-          if (!engine && req.userContext.APOLLO_ENGINE_KEY) {
-            engine = new Engine({
-              engineConfig: {
-                apiKey: req.userContext.APOLLO_ENGINE_KEY,
-                reporting: {
-                  debugReports: true
-                },
-                origins: [
-                  {
-                    http: {
-                      url: req.webtaskContext.secrets.url,
-                    },
-                  },
-                ],
-              },
-            });
-
-            engine.start();
           }
           next();
         },
@@ -194,9 +177,10 @@ export const RUNNER_WRAPPER = (code: string) =>
               const traceCollector = req._traceCollector;
               traceCollector.requestDidEnd();
               if (engine) {
-                return {
-                  tracing: traceCollector.format(),
-                };
+                const tracing = traceCollector.format();
+                const result = {};
+                result[tracing[0]] = tracing[1];
+                return result;
               } else {
                 return {};
               }
@@ -206,6 +190,37 @@ export const RUNNER_WRAPPER = (code: string) =>
       );
     }
 
-    module.exports = Webtask.fromExpress(server);
+    var webtask = Webtask.fromExpress(server);
+
+    module.exports = function (context, req, res) {
+      req.userContext = JSON.parse(
+        context.secrets.userContext
+      ).reduce(function(acc, next) {
+        acc[next.key] = next.value;
+        return acc;
+      }, {});
+
+      if (!engine && req.userContext.APOLLO_ENGINE_KEY) {
+        engine = new Engine({
+          endpoint: '/',
+          engineConfig: {
+            apiKey: req.userContext.APOLLO_ENGINE_KEY,
+            reporting: {
+              debugReports: true
+            },
+            origins: [
+              {
+                http: {
+                  url: context.secrets.url,
+                },
+              },
+            ],
+          },
+        });
+        engine.start();
+      }
+
+      webtask(context, req, res);
+    }
   })();
 `;
