@@ -72,6 +72,7 @@ export const RUNNER_WRAPPER = (code: string) =>
     }
 
     var graphql = require('graphql');
+    var GraphQLExtensions = require('graphql-extensions')
     var Engine = require('apollo-engine').Engine;
     var express = require('express');
     var Webtask = require('webtask-tools');
@@ -171,7 +172,7 @@ export const RUNNER_WRAPPER = (code: string) =>
         },
         bodyParser.json(),
         (req, res, next) => {
-          const traceCollector = new Tracing.TraceCollector();
+          const traceCollector = new Tracing.TracingExtension();
           traceCollector.requestDidStart();
           req._traceCollector = traceCollector;
           next();
@@ -182,11 +183,11 @@ export const RUNNER_WRAPPER = (code: string) =>
             Promise.resolve(contextFn(req.headers, req.userContext)),
             Promise.resolve(rootFunction(req.headers, req.userContext))
           ]).then((results) => ({
-            schema: Tracing.instrumentSchemaForTracing(results[0]),
+            schema: GraphQLExtensions.enableGraphQLExtensions(results[0]),
             context: Object.assign({},
               results[1],
               {
-                _traceCollector: req._traceCollector,
+                _extensionsStack: [req._traceCollector],
               }
             ),
             root: results[2],
@@ -195,7 +196,7 @@ export const RUNNER_WRAPPER = (code: string) =>
               traceCollector.requestDidEnd();
               if (engine) {
                 return {
-                  tracing: Tracing.formatTraceData(traceCollector),
+                  tracing: traceCollector.format(),
                 };
               } else {
                 return {};

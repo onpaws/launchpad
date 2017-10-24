@@ -10,6 +10,7 @@ const WEBTASK_API_URL = 'https://webtask.it.auth0.com/api';
 
 const CORE_DEPENDENCIES = [
   'graphql',
+  'graphql-extensions',
   'apollo-engine',
   'express',
   'webtask-tools',
