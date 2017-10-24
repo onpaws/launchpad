@@ -145,15 +145,14 @@ export const RUNNER_WRAPPER = (code: string) =>
             engine = new Engine({
               engineConfig: {
                 apiKey: req.userContext.APOLLO_ENGINE_KEY,
-                "reporting": {
-                  "debugReports": true
-                },
-                logcfg: {
-                  level: 'DEBUG',
+                reporting: {
+                  debugReports: true
                 },
                 origins: [
                   {
-                    url: req.webtaskContext.secrets.url,
+                    http: {
+                      url: req.webtaskContext.secrets.url,
+                    },
                   },
                 ],
               },
