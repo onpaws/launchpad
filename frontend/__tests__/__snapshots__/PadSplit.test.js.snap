@@ -5,7 +5,17 @@ exports[`render normally 1`] = `
   className="PadSplit"
 >
   <Header
+    currentContext={
+      Array [
+        Object {
+          "key": "test",
+          "value": "testValue",
+        },
+      ]
+    }
+    engineClient={Object {}}
     isDeploying={false}
+    onContextChange={[Function]}
     onDeploy={[Function]}
     onDownload={[Function]}
     onFork={[Function]}
@@ -88,7 +98,7 @@ exports[`render normally 1`] = `
               "requiresPrefix": Object {},
             },
             "_requiresPrefix": Object {},
-            "_userAgent": "Node.js (linux; U; rv:v8.2.1) AppleWebKit/537.36 (KHTML, like Gecko)",
+            "_userAgent": "Node.js (linux; U; rv:v6.11.2) AppleWebKit/537.36 (KHTML, like Gecko)",
             "prefixedKeyframes": "keyframes",
           }
         }

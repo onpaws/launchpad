@@ -44,6 +44,44 @@ exports[`render others 1`] = `
       onSetTitle={[Function]}
       title="Fake 1"
     />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": true,
+          "isDraft": false,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "some-new-username",
+            "id": "some-new-id",
+            "pads": Array [],
+          },
+        }
+      }
+    />
   </div>
   <div
     className="Header-Gap"
@@ -110,6 +148,44 @@ exports[`renders anon existing 1`] = `
       onSetTitle={[Function]}
       title="Fake 1"
     />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": true,
+          "isDraft": false,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "example",
+            "id": "test-ids",
+            "pads": Array [],
+          },
+        }
+      }
+    />
   </div>
   <div
     className="Header-Gap"
@@ -170,6 +246,40 @@ exports[`renders anon new 1`] = `
       onSetTitle={[Function]}
       title="Fake 1"
     />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": false,
+          "isDraft": false,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": null,
+        }
+      }
+    />
   </div>
   <div
     className="Header-Gap"
@@ -229,6 +339,44 @@ exports[`renders deploying 1`] = `
       githubUsername="example"
       onSetTitle={[Function]}
       title="Fake 1"
+    />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": true,
+          "isDraft": true,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "example",
+            "id": "test-ids",
+            "pads": Array [],
+          },
+        }
+      }
     />
   </div>
   <div
@@ -296,6 +444,44 @@ exports[`renders draft 1`] = `
       onSetTitle={[Function]}
       title="Fake 1"
     />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": true,
+          "isDraft": true,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "example",
+            "id": "test-ids",
+            "pads": Array [],
+          },
+        }
+      }
+    />
   </div>
   <div
     className="Header-Gap"
@@ -362,6 +548,44 @@ exports[`renders own 1`] = `
       onSetTitle={[Function]}
       title="Fake 1"
     />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": true,
+          "isDraft": false,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "example",
+            "id": "test-ids",
+            "pads": Array [],
+          },
+        }
+      }
+    />
   </div>
   <div
     className="Header-Gap"
@@ -427,6 +651,44 @@ exports[`renders undeployed 1`] = `
       githubUsername="example"
       onSetTitle={[Function]}
       title="Fake 1"
+    />
+    <EngineConnector
+      currentContext={Array []}
+      engineClient={Object {}}
+      onContextChange={[Function]}
+      pad={
+        Object {
+          "code": "code",
+          "context": Array [
+            Object {
+              "key": "secret",
+              "value": "secret",
+            },
+          ],
+          "defaultQuery": "{ hello }",
+          "defaultVariables": null,
+          "dependencies": Array [
+            Object {
+              "name": "graphql-js",
+              "version": "0.8.9",
+            },
+          ],
+          "deployedCode": "deployed code",
+          "description": "Description 1",
+          "draft": null,
+          "id": "fakeid1",
+          "isDeployed": false,
+          "isDraft": false,
+          "title": "Fake 1",
+          "token": "test-token-2",
+          "url": "http://example.com",
+          "user": Object {
+            "githubUsername": "example",
+            "id": "test-ids",
+            "pads": Array [],
+          },
+        }
+      }
     />
   </div>
   <div

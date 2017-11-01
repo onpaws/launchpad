@@ -41,11 +41,7 @@ export default class HeaderButton extends Component {
       if (this.state.isHovered) {
         tooltipClassName += ' HeaderButton-Tooltip--show';
       }
-      return (
-        <div className={tooltipClassName}>
-          {this.props.tooltip}
-        </div>
-      );
+      return <div className={tooltipClassName}>{this.props.tooltip}</div>;
     } else {
       return null;
     }

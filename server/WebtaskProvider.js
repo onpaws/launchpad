@@ -9,14 +9,42 @@ const UNPKG_URL = 'https://unpkg.com';
 const WEBTASK_API_URL = 'https://webtask.it.auth0.com/api';
 
 const CORE_DEPENDENCIES = [
-  'graphql',
-  'graphql-extensions',
-  'apollo-engine',
-  'express',
-  'webtask-tools',
-  'body-parser',
-  'express-graphql',
-  'apollo-tracing',
+  {
+    name: 'graphql',
+    version: '0.11.7',
+  },
+  {
+    name: 'graphql-tools',
+    version: '2.6.1',
+  },
+  {
+    name: 'apollo-tracing',
+    version: '0.1.1',
+  },
+  {
+    name: 'graphql-extensions',
+    version: '0.0.5',
+  },
+  {
+    name: 'apollo-engine',
+    version: '0.5.2',
+  },
+  {
+    name: 'express',
+    version: '4.16.2',
+  },
+  {
+    name: 'webtask-tools',
+    version: '3.2.0',
+  },
+  {
+    name: 'body-parser',
+    version: '1.18.2',
+  },
+  {
+    name: 'express-graphql',
+    version: '0.6.11',
+  },
 ];
 
 class WebtaskProvider {
@@ -132,11 +160,6 @@ class WebtaskProvider {
     const packageMap = fromPairs(
       oldDependencies.map(({ name, version }) => [name, version]),
     );
-    CORE_DEPENDENCIES.forEach(coreDep => {
-      if (!dependencies.find(name => name === coreDep)) {
-        dependencies = [coreDep, ...dependencies];
-      }
-    });
     const result = await Promise.all(
       dependencies.map(async name => {
         if (packageMap[name]) {
@@ -160,7 +183,7 @@ class WebtaskProvider {
         }
       }),
     );
-    return result;
+    return [...CORE_DEPENDENCIES, ...result];
   }
 
   async ensureDependencies(

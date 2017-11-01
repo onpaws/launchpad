@@ -75,9 +75,7 @@ export default class Footer extends React.Component {
       return (
         <div className="Footer-EndpointURL">
           <span>GraphQL Endpoint:</span>
-          <span className="EndpointURL">
-            {this.props.url}
-          </span>
+          <span className="EndpointURL">{this.props.url}</span>
         </div>
       );
     } else {

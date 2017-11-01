@@ -66,7 +66,7 @@ export default class KeyValueEditor extends Component {
   }
 
   renderInputs() {
-    return this.props.value.map(({ key, value }, i) =>
+    return this.props.value.map(({ key, value }, i) => (
       <div className="KeyValueEditor-Line" key={i}>
         <input
           className="KeyValueEditor-Input"
@@ -81,8 +81,8 @@ export default class KeyValueEditor extends Component {
         >
           <span className="icon-cross" />
         </button>
-      </div>,
-    );
+      </div>
+    ));
   }
 
   render() {

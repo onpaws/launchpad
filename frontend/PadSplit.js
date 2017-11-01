@@ -18,6 +18,7 @@ import SplitPane from 'react-split-pane';
 type PadSplitProps = {|
   pad: Pad,
   user: ?User,
+  engineClient: any,
   currentCode: string,
   currentContext: Array<Context>,
   isDeploying: boolean,
@@ -235,14 +236,12 @@ export default class PadSplit extends Component {
                 onChange={this.props.onCodeChange}
               />
             </div>
-            {canEdit
-              ? null
-              : <div className="editor-fork-banner">
-                  Log in and fork this pad in order to edit it.
-                </div>}
-            <div className="PadSplit-Logs">
-              {this.renderLogs()}
-            </div>
+            {canEdit ? null : (
+              <div className="editor-fork-banner">
+                Log in and fork this pad in order to edit it.
+              </div>
+            )}
+            <div className="PadSplit-Logs">{this.renderLogs()}</div>
           </div>
           <div className="PadSplit-Right">
             <GraphiQLWrapper
@@ -263,6 +262,7 @@ export default class PadSplit extends Component {
         <Header
           pad={this.props.pad}
           user={this.props.user}
+          engineClient={this.props.engineClient}
           isDeploying={this.props.isDeploying}
           onDeploy={this.handleDeploy}
           onReset={this.props.onReset}
@@ -272,11 +272,11 @@ export default class PadSplit extends Component {
           onLogout={this.props.onLogout}
           onSetTitle={this.props.onSetTitle}
           onSetDescription={this.props.onSetDescription}
+          currentContext={this.props.currentContext}
+          onContextChange={this.props.onContextChange}
         />
 
-        <div className="PadSplit-Main">
-          {this.renderEditors()}
-        </div>
+        <div className="PadSplit-Main">{this.renderEditors()}</div>
 
         <Footer
           isDraft={this.props.pad.isDraft}

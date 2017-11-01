@@ -50,6 +50,7 @@ function renderPadSplit({
     <PadSplit
       pad={pad}
       user={user}
+      engineClient={{}}
       currentCode={currentCode}
       currentContext={currentContext}
       isDeploying={isDeploying}

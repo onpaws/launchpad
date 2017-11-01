@@ -1,18 +1,21 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import type { Pad, User } from '../types';
+import type { Pad, User, Context } from '../types';
 import HeaderLogo from './HeaderLogo';
 import UserBar from './UserBar';
 import HeaderButton from './HeaderButton';
 import TitleEditor from './TitleEditor';
+import EngineConnector from './EngineConnector';
 import './Header.less';
 
 export default class Header extends Component {
   props: {|
     pad: Pad,
     user: ?User,
+    engineClient: any,
     isDeploying: boolean,
+    currentContext: Array<Context>,
     onDeploy: () => any,
     onReset: () => any,
     onFork: () => any,
@@ -21,6 +24,7 @@ export default class Header extends Component {
     onLogout: () => any,
     onSetTitle: (title: string) => any,
     onSetDescription: (description: string) => any,
+    onContextChange: (Array<Context>) => any,
   |};
 
   renderDeployButton() {
@@ -125,6 +129,12 @@ export default class Header extends Component {
                 (this.props.user &&
                   this.props.pad.user.id === this.props.user.id),
             )}
+          />
+          <EngineConnector
+            engineClient={this.props.engineClient}
+            pad={this.props.pad}
+            currentContext={this.props.currentContext}
+            onContextChange={this.props.onContextChange}
           />
         </div>
         <div className="Header-Gap" />

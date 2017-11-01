@@ -13,16 +13,12 @@ export default class Dependencies extends Component {
     if (this.props.dependencies && this.props.dependencies.length > 0) {
       return (
         <div className="Dependencies-List">
-          {this.props.dependencies.map(({ name, version }, i) =>
+          {this.props.dependencies.map(({ name, version }, i) => (
             <div className="Dependencies-Item" key={i}>
-              <div className="Dependencies-Name">
-                {name}
-              </div>
-              <div className="Dependencies-Version">
-                {version}
-              </div>
-            </div>,
-          )}
+              <div className="Dependencies-Name">{name}</div>
+              <div className="Dependencies-Version">{version}</div>
+            </div>
+          ))}
         </div>
       );
     } else {

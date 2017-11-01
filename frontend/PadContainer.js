@@ -20,6 +20,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 type PadContainerProps = {|
   id: string,
   client: any,
+  engineClient: any,
   padData: ApolloData<'pad', PadType>,
   meData: ApolloData<'me', UserType>,
   updatePad: ({
@@ -379,11 +380,7 @@ class PadContainer extends Component {
         </div>
       );
     } else if (this.hasError()) {
-      return (
-        <div>
-          {this.getErrorMessage()}
-        </div>
-      );
+      return <div>{this.getErrorMessage()}</div>;
     } else {
       let pad = this.props.padData.pad;
       const me = this.props.meData.me;
@@ -406,6 +403,7 @@ class PadContainer extends Component {
         <Pad
           pad={pad}
           user={me}
+          engineClient={this.props.engineClient}
           isDeploying={this.state.isDeploying}
           onDeploy={this.handleDeploy}
           onFork={this.handleFork}
