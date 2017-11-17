@@ -284,7 +284,7 @@ const PadModel = {
     const pad = await PadModel.getById(id, context);
     const newId = await PadModel.generateId(context);
     const user = await UserModel.me(context);
-    const token = await context.webtask.getToken(id);
+    const token = await context.webtask.getToken(newId);
     if (pad) {
       let padContext = pad.context || [];
       if (!UserModel.canSeePadSecrets(user, pad, context)) {
