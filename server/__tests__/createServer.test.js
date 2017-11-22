@@ -224,6 +224,7 @@ describe('integration lifecycle test', () => {
       data: {
         hello: 'Hello world!',
       },
+      extensions: {},
     });
     createdIds.push(`${padId}_draft`);
   });
@@ -274,6 +275,7 @@ describe('integration lifecycle test', () => {
       data: {
         hello: 'Hello world!',
       },
+      extensions: {},
     });
     createdIds.push(`${pad.id}_depl`);
   });
@@ -300,6 +302,7 @@ describe('integration lifecycle test', () => {
       data: {
         hello: 'Hello world!',
       },
+      extensions: {},
     });
     createdIds.push(`${pad.id}_depl`);
   });

@@ -29,12 +29,8 @@ export default class Modal extends Component {
         <button onClick={this.props.onRequestClose} className="close-button">
           <span className="icon-cross" />
         </button>
-        <div className="Modal-Title">
-          {title}
-        </div>
-        <div className="Modal-Body">
-          {this.props.children}
-        </div>
+        <div className="Modal-Title">{title}</div>
+        <div className="Modal-Body">{this.props.children}</div>
       </ReactModal>
     );
   }

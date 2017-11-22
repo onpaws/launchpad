@@ -32,6 +32,17 @@ const apolloClient = new ApolloClient({
   networkInterface,
 });
 
+const engineNetworkInterface = createNetworkInterface({
+  uri: 'https://engine-graphql.apollodata.com/api/graphql',
+  opts: {
+    credentials: 'include',
+  },
+});
+
+const engineApolloClient = new ApolloClient({
+  networkInterface: engineNetworkInterface,
+});
+
 export default class App extends Component {
   props: {|
     id: ?string,
@@ -46,7 +57,9 @@ export default class App extends Component {
     if (this.props.type === 'list') {
       return <ListContainer />;
     } else {
-      return <PadContainer id={this.props.id} />;
+      return (
+        <PadContainer id={this.props.id} engineClient={engineApolloClient} />
+      );
     }
   }
 

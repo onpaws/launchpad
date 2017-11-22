@@ -60,9 +60,12 @@ test('renders', () => {
   expect(component).toMatchSnapshot();
   expect(onChange.mock.calls.length).toBe(1);
 
-  component.find('.KeyValueEditor-Input').first().simulate('change', {
-    currentTarget: { value: 'test ' },
-  });
+  component
+    .find('.KeyValueEditor-Input')
+    .first()
+    .simulate('change', {
+      currentTarget: { value: 'test ' },
+    });
   expect(component).toMatchSnapshot();
   expect(onChange.mock.calls.length).toBe(2);
 });

@@ -47,6 +47,9 @@ function renderHeader({ user, pad, isDraft, isDeployed, isDeploying }) {
         isDraft,
         isDeployed,
       }}
+      engineClient={{}}
+      currentContext={[]}
+      onContextChange={() => {}}
       isDeploying={isDeploying}
       onDeploy={() => {}}
       onReset={() => {}}

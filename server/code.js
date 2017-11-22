@@ -56,120 +56,171 @@ export function context(headers, secrets) {
 
 export const RUNNER_WRAPPER = (code: string) =>
   `
-var __LAUNCHPAD__runtimeError;
-try {
-  ${code}
-} catch (e) {
-  __LAUNCHPAD__runtimeError = e;
-}
-
-(function () {
-  if (__LAUNCHPAD__runtimeError) {
-    module.exports = function webtask(context, callback) {
-      callback(__LAUNCHPAD__runtimeError);
-    }
-    return;
+  var __LAUNCHPAD__runtimeError;
+  try {
+    ${code};
+  } catch (e) {
+    __LAUNCHPAD__runtimeError = e;
   }
 
-  var graphql = require('graphql');
-
-  var schemaFunction = exports.schemaFunction || function () {
-    return exports.schema;
-  }
-  var schema;
-  var rootValue = exports.rootValue || {};
-  var rootFunction = exports.rootFunction || function () {
-    return rootValue;
-  };
-  var contextFn = exports.context || function (headers, secrets) {
-    return Object.assign(
-      {
-        headers: headers,
-      },
-      secrets
-    );
-  };
-
-  Object.keys(exports).forEach(function (key) {
-    if ([
-      'default',
-      'schema',
-      'schemaFunction',
-      'context',
-      'rootValue',
-      'rootFunction',
-    ].indexOf(key) === -1) {
-      throw new Error('Unknown export: ' + key);
+  (function() {
+    if (__LAUNCHPAD__runtimeError) {
+      module.exports = function webtask(context, callback) {
+        callback(__LAUNCHPAD__runtimeError);
+      };
+      return;
     }
-  });
 
-  if (!exports.schema && !exports.schemaFunction) {
-    throw new Error('You need to export object with a field \`schema\` or a function \`schemaFunction\` to run a Pad.');
-  }
+    var graphql = require('graphql');
+    var GraphQLExtensions = require('graphql-extensions')
+    var Engine = require('apollo-engine').Engine;
+    var express = require('express');
+    var Webtask = require('webtask-tools');
+    var bodyParser = require('body-parser');
+    var graphqlHTTP = require('express-graphql');
+    var Tracing = require('apollo-tracing');
 
-  function runGraphQL(schema, rootValue, context, userContext) {
-    try {
-      var query = context.body.query;
-      var variables = context.body.variables;
-      var operationName = context.body.operationName;
+    var server;
+    var engine;
 
-      return Promise.all([
-        Promise.resolve(schema),
-        Promise.resolve(contextFn(context.headers, userContext)),
-        Promise.resolve(rootFunction(context.headers, userContext)),
-      ])
-        .then(function (result) {
-          var schema = result[0];
-          var graphQLContext = result[1];
-          var rootValue = result[2];
-          return graphql.graphql(
-            schema,
-            query,
-            rootValue,
-            graphQLContext,
-            variables,
-            operationName
-          );
-        })
-        .then(function (result) {
-          return {
-            ok: true,
-            result: result,
-          };
-        })
-        .catch(function (error) {
-          return {
-            ok: false,
-            error: error,
-          }
-        });
-    } catch (error) {
-      return Promise.resolve({
-        ok: false,
-        error: error,
-      });
-    }
-  }
+    var schemaFunction =
+      exports.schemaFunction ||
+      function() {
+        return exports.schema;
+      };
+    var schema;
+    var rootValue = exports.rootValue || {};
+    var rootFunction =
+      exports.rootFunction ||
+      function() {
+        return rootValue;
+      };
+    var contextFn =
+      exports.context ||
+      function(headers, secrets) {
+        return Object.assign(
+          {
+            headers: headers,
+          },
+          secrets
+        );
+      };
 
-  module.exports = function webtask(context, callback) {
-    if (!context.body || !context.body.query) {
-      callback('No query was provided in request body.');
-    }
-    var userContext = JSON.parse(context.secrets.userContext)
-    .reduce(function (acc, next) {
-      acc[next.key] = next.value;
-      return acc;
-    }, {});
-    if (!schema) {
-      schema = schemaFunction(userContext);
-    }
-    runGraphQL(schema, rootValue, context, userContext).then(function (result) {
-      if (result.ok) {
-        callback(null, result.result);
-      } else {
-        callback(result.error);
+    Object.keys(exports).forEach(function(key) {
+      if (
+        [
+          'default',
+          'schema',
+          'schemaFunction',
+          'context',
+          'rootValue',
+          'rootFunction',
+        ].indexOf(key) === -1
+      ) {
+        throw new Error('Unknown export: ' + key);
       }
     });
-  }
-})();
+
+    if (!exports.schema && !exports.schemaFunction) {
+      throw new Error(
+        'You need to export object with a field \`schema\` or a function \`schemaFunction\` to run a Pad.'
+      );
+    }
+
+    process.env["GOMAXPROCS"] = "1"
+
+    if (!server) {
+      server = express();
+      server.use(
+        '/',
+        (req, res, next) => {
+          req.userContext = JSON.parse(
+            req.webtaskContext.secrets.userContext
+          ).reduce(function(acc, next) {
+            acc[next.key] = next.value;
+            return acc;
+          }, {});
+          if (!schema) {
+            schema = schemaFunction(req.userContext);
+          }
+          next();
+        },
+        (req, res, next) => {
+          if (engine) {
+            engine.expressMiddleware()(req, res, next);
+          } else {
+            next();
+          }
+        },
+        bodyParser.json(),
+        (req, res, next) => {
+          const traceCollector = new Tracing.TracingExtension();
+          traceCollector.requestDidStart();
+          req._traceCollector = traceCollector;
+          next();
+        },
+        graphqlHTTP(req =>
+          Promise.all([
+            Promise.resolve(schema),
+            Promise.resolve(contextFn(req.headers, req.userContext)),
+            Promise.resolve(rootFunction(req.headers, req.userContext))
+          ]).then((results) => ({
+            schema: GraphQLExtensions.enableGraphQLExtensions(results[0]),
+            context: Object.assign({},
+              results[1],
+              {
+                _extensionsStack: [req._traceCollector],
+              }
+            ),
+            root: results[2],
+            extensions: () => {
+              const traceCollector = req._traceCollector;
+              traceCollector.requestDidEnd();
+              if (engine) {
+                const tracing = traceCollector.format();
+                const result = {};
+                result[tracing[0]] = tracing[1];
+                return result;
+              } else {
+                return {};
+              }
+            }
+          }))
+        )
+      );
+    }
+
+    var webtask = Webtask.fromExpress(server);
+
+    module.exports = function (context, req, res) {
+      req.userContext = JSON.parse(
+        context.secrets.userContext
+      ).reduce(function(acc, next) {
+        acc[next.key] = next.value;
+        return acc;
+      }, {});
+
+      if (!engine && req.userContext.APOLLO_ENGINE_KEY) {
+        engine = new Engine({
+          endpoint: '/',
+          engineConfig: {
+            apiKey: req.userContext.APOLLO_ENGINE_KEY,
+            reporting: {
+              debugReports: true
+            },
+            origins: [
+              {
+                http: {
+                  url: context.secrets.url,
+                },
+              },
+            ],
+          },
+        });
+        engine.start();
+      }
+
+      webtask(context, req, res);
+    }
+  })();
 `;

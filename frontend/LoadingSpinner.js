@@ -21,9 +21,7 @@ const LoadingSpinner = ({
   return (
     <div className={classnames('loading-spinner', size, className)}>
       <div className="spinner-wheel" />
-      <div className="spinner-ticks">
-        {ticks}
-      </div>
+      <div className="spinner-ticks">{ticks}</div>
     </div>
   );
 };

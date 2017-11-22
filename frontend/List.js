@@ -29,9 +29,7 @@ export default class List extends Component {
     return (
       <div className="List">
         <ListHeader user={this.props.user} onLogout={this.props.onLogout} />
-        <div className="List-PadList">
-          {this.renderPads()}
-        </div>
+        <div className="List-PadList">{this.renderPads()}</div>
       </div>
     );
   }

@@ -9,6 +9,7 @@ import PadSplit from './PadSplit';
 type PadProps = {|
   pad: PadType,
   user: User,
+  engineClient: any,
   isDeploying: boolean,
   onDeploy: ('deploy' | 'draft', DeployPayload) => any,
   onFork: () => any,
@@ -203,6 +204,7 @@ export default class Pad extends Component {
       <PadSplit
         pad={this.props.pad}
         user={this.props.user}
+        engineClient={this.props.engineClient}
         isDeploying={this.props.isDeploying}
         error={this.state.error}
         currentCode={this.state.currentCode}
