@@ -24,6 +24,6 @@ export default `{
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
 {{dependencies}}
-    "graphql-server-express": "^0.6.0"
+    "graphql-server-express": "^1.2.0"
   }
 }`;
