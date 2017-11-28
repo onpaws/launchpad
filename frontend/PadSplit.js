@@ -14,6 +14,7 @@ import Modal from './Modal';
 import './PadSplit.less';
 import './Resizer.less';
 import SplitPane from 'react-split-pane';
+import Helmet from 'react-helmet';
 
 type PadSplitProps = {|
   pad: Pad,
@@ -253,6 +254,14 @@ export default class PadSplit extends Component {
           </div>
         </SplitPane>
       </div>
+    );
+  }
+
+  renderHelmet() {
+    return (
+      <Helmet>
+        <title>{this.props.pad.title || 'Apollo Launchpad'}</title>
+      </Helmet>
     );
   }
 
