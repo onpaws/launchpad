@@ -125,7 +125,13 @@ export default class EngineConnector extends Component<
   }
 
   render() {
-    if (this.props.pad.isDraft || !this.state.data || this.state.loading) {
+    if (
+      this.props.pad.isDraft ||
+      !this.state.data ||
+      this.state.loading ||
+      !this.props.pad.user ||
+      this.props.pad.user.id !== this.props.user.id
+    ) {
       return null;
     } else {
       return <div className="Header-EngineButtons">{this.renderInner()}</div>;

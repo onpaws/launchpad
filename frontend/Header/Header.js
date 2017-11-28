@@ -133,6 +133,7 @@ export default class Header extends Component {
           <EngineConnector
             engineClient={this.props.engineClient}
             pad={this.props.pad}
+            user={this.props.user}
             currentContext={this.props.currentContext}
             onContextChange={this.props.onContextChange}
           />

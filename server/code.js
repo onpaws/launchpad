@@ -154,9 +154,8 @@ export const RUNNER_WRAPPER = (code: string) =>
         },
         bodyParser.json(),
         (req, res, next) => {
-          const traceCollector = new Tracing.TracingExtension();
-          traceCollector.requestDidStart();
-          req._traceCollector = traceCollector;
+          req._traceCollector = new Tracing.TracingExtension();
+          req._traceCollector.requestDidStart();
           next();
         },
         graphqlHTTP(req =>
@@ -169,21 +168,16 @@ export const RUNNER_WRAPPER = (code: string) =>
             context: Object.assign({},
               results[1],
               {
-                _extensionsStack: [req._traceCollector],
+                _extensionStack: new GraphQLExtensions.GraphQLExtensionStack([req._traceCollector]),
               }
             ),
             root: results[2],
             extensions: () => {
-              const traceCollector = req._traceCollector;
-              traceCollector.requestDidEnd();
-              if (engine) {
-                const tracing = traceCollector.format();
-                const result = {};
-                result[tracing[0]] = tracing[1];
-                return result;
-              } else {
-                return {};
-              }
+              req._traceCollector.requestDidEnd();
+              const tracing = req._traceCollector.format();
+              const result = {};
+              result[tracing[0]] = tracing[1];
+              return result;
             }
           }))
         )
