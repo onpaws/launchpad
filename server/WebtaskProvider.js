@@ -27,7 +27,7 @@ const CORE_DEPENDENCIES = [
   },
   {
     name: 'apollo-engine',
-    version: '0.5.2',
+    version: '0.6.0',
   },
   {
     name: 'express',
