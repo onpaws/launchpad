@@ -12,7 +12,7 @@
   "dependencies": {
     "apollo-client": "^1.4.2",
     "auth0-js": "^8.12.1",
-    "auth0-lock": "^10.14.0",
+    "auth0-lock": "^10.24.1",
     "babel-plugin-detective": "^2.0.0",
     "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
