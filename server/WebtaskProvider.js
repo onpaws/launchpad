@@ -11,11 +11,11 @@ const WEBTASK_API_URL = 'https://webtask.it.auth0.com/api';
 const CORE_DEPENDENCIES = [
   {
     name: 'graphql',
-    version: '0.11.7',
+    version: '0.12.3',
   },
   {
     name: 'graphql-tools',
-    version: '2.6.1',
+    version: '2.15.0',
   },
   {
     name: 'apollo-tracing',
@@ -183,7 +183,7 @@ class WebtaskProvider {
         }
       }),
     );
-    return [...CORE_DEPENDENCIES, ...result];
+    return [...result, ...CORE_DEPENDENCIES];
   }
 
   async ensureDependencies(
