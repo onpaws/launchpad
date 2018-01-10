@@ -1,7 +1,7 @@
 /* @flow */
 
 export default `{
-  presets: ['latest'],
+  presets: ['env'],
   plugins: [
     'transform-runtime',
     'transform-async-generator-functions',

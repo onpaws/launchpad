@@ -17,7 +17,7 @@ export default `{
     "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-latest": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
